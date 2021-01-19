@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Setu Example</title>
+    <script src="../jquery-3.5.1.min.js"></script>
+    <script src="../knockout-3.5.1.js"></script>
+
+    <script>
+        $(function () {
+            var myViewModel = {
+                course: 'Knockout',
+                author: 'Ayad'
+            };
+
+            ko.applyBindings(myViewModel);
+
+        });
+    </script>
+</head>
+
+<body>
+
+    <div>
+        The course <u><span data-bind="text: course"></span> </u> will be taught by
+        <b><span data-bind="text: author"></span></b>
+    </div>
+
+    <!-- <script>
+        var myViewModel = {
+            course: 'Knockout',
+            author: 'Ayad'
+        }
+
+        ko.applyBindings(myViewModel);
+    </script> -->
+
+</body>
+
+</html>
