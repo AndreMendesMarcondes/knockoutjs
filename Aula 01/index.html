@@ -13,7 +13,7 @@
                 author: 'Ayad'
             };
 
-            ko.applyBindings(myViewModel);
+            ko.applyBindings(myViewModel, document.getElementById('withBidning'));
 
         });
     </script>
@@ -21,7 +21,12 @@
 
 <body>
 
-    <div>
+    <div id="withBidning">
+        The course <u><span data-bind="text: course"></span> </u> will be taught by
+        <b><span data-bind="text: author"></span></b>
+    </div>
+
+    <div id="noBidning">
         The course <u><span data-bind="text: course"></span> </u> will be taught by
         <b><span data-bind="text: author"></span></b>
     </div>
