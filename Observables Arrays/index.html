@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Observables</title>
+    <script src="../jquery-3.5.1.min.js"></script>
+    <script src="../knockout-3.5.1.js"></script>
+
+    <script>
+        $(function () {
+            var listModel = function (courses) {
+                var self = this;
+                self.courses = ko.observableArray(courses);
+                self.newCourse = ko.observable("");
+                self.addCourse = function () {
+                    if (self.newCourse() != "") {
+                        self.courses.push(self.newCourse());
+                        self.newCourse("");
+                    }
+                }
+            }
+
+            ko.applyBindings(new listModel(["C#", "Html", "Visual Basic"]));
+        });
+    </script>
+</head>
+
+<body>
+    <form data-bind="submit: addCourse">
+        New course:
+        <input data-bind='value: newCourse, valueUpdate: "afterkeydown"' />
+        <button type="submit" data-bind="enable: newCourse().length > 0">Add</button>
+        <p>Courses liusta:</p>
+        <select multiple="multiple" width="50" data-bind="options: courses"></select>
+        <h3>There are <span data-bind="text: courses().length"></span> courses in the list!</h3>
+    </form>
+</body>
+
+</html>

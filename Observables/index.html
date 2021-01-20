@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Observables</title>
+    <script src="../jquery-3.5.1.min.js"></script>
+    <script src="../knockout-3.5.1.js"></script>
+
+    <script>
+        $(function () {
+            var myViewModel = function (myCourse, myRaiting) {
+                this.course = ko.observable(myCourse);
+                this.raiting = ko.observable(myRaiting);
+                this.courseResult = ko.computed(function () {
+                    return "The course " + this.course() + " got a raiting of " + this.raiting();
+                }, this);
+            };
+
+            ko.applyBindings(new myViewModel("Knockout JS", 9));
+        });
+    </script>
+</head>
+
+<body>
+    <p>Course: <input data-bind="value: course" /></p>
+    <p>Raiting: <input data-bind="value: raiting" /></p>
+    <h3><span data-bind="text: courseResult"></span></h3>
+</body>
+
+</html>
