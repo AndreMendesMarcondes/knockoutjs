@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Observables</title>
+    <script src="../jquery-3.5.1.min.js"></script>
+    <script src="../knockout-3.5.1.js"></script>
+
+    <script>
+        $(function () {
+            var myViewModel = function (price, quantity) {
+                this.itemPrice = ko.observable(price);
+                this.quantity = ko.observable(quantity);
+                this.totalPrice = ko.computed({
+                    read: function () {
+                        return "$" + (this.itemPrice() * this.quantity()).toFixed(2);
+                    },
+                    write: function (value) {
+                        value = parseFloat(value.replace("$", ""));
+                        value = isNaN(value) ? 0 : value;
+                        var temPrice = value / this.quantity();
+                        this.itemPrice(temPrice);
+                    },
+                    owner: this
+                });
+            };
+
+            ko.applyBindings(new myViewModel(15.00, 9));
+        });
+    </script>
+</head>
+
+<body>
+    <p>Price per item: <input data-bind="value: itemPrice" /></p>
+    <p>Quantity: <input data-bind="value: quantity" /></p>
+    <p>Total price: <input data-bind="value: totalPrice" /></p>
+</body>
+
+</html>
