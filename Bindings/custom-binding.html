@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Observables</title>
-    <script src="../jquery-3.5.1.min.js"></script>
-    <script src="../knockout-3.5.1.js"></script>
-    <style>
+    <title>Custom Binding</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js"></script>
+
+    <style type="text/css">
         .book {
             font-family: Verdana;
             color: #0000FF;
             background-color: #CCCCCC;
-            border: 1px solid black;
+            border: 1px solid #000000;
             padding: 5px;
             margin: 5px;
             width: 200px;
@@ -18,58 +19,60 @@
             -webkit-border-radius: 25px;
         }
     </style>
+
     <script>
         $(function () {
+
             ko.bindingHandlers.slideVisible = {
                 init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
-                    //this will be called when the binding is first applied to an element
-                    //set up any initial state, event handlers, etc. here
-                    var value = ko.unwrap(valueAccessor()); //get the current value
-                    $(element).toggle(value); //jquery will hide/show the element
+                    // This will be called when the binding is first applied to an element
+                    // Set up any initial state, event handlers, etc. here
+                    var value = ko.unwrap(valueAccessor()); // Get the current value of the current property we're bound to
+                    $(element).toggle(value); // jQuery will hide/show the element depending on whether "value" is true or false
                 },
                 update: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
-                    //this will be called once when the binding is first applied to an element,
-                    //and again whenever the associated observable change value.
-                    //update the DOM elmenet based on the supplied values here
+                    // This will be called once when the binding is first applied to an element,
+                    // and again whenever the associated observable changes value.
+                    // Update the DOM element based on the supplied values here.
 
-                    //first get the lates data we're bouynd to
+                    // First get the latest data that we're bound to
                     var value = valueAccessor(),
                         allBindings = allBindingsAccessor();
 
-                    //next, wheter or not the supplied model property is observable, get iits current
+                    // Next, whether or not the supplied model property is observable, get its current value
                     var valueUnwrapped = ko.unwrap(value);
 
-                    var duration = allBindings.duration || 400;
+                    // Grab some more data from another binding property
+                    var duration = allBindings.duration || 400; // 400ms is default duration unless otherwise specified
 
+                    // Now manipulate the DOM element
                     if (valueUnwrapped == true)
-                        $(element).slideDown(duration); //make the element visible
+                        $(element).slideDown(duration); // Make the element visible
                     else
-                        $(element).slideUp(duration); //make the element invisible
+                        $(element).slideUp(duration);   // Make the element invisible
                 }
+            };
+
+            var BookViewModel = {
+                name: 'APress',
+                book: 'Pro JavaScript',
+                price: 49.99,
+                showBookDetail: ko.observable(false)
             }
 
+            ko.applyBindings(BookViewModel);
         });
-
-        var BookViewModel = {
-            name: 'APress',
-            book: 'Pro Js',
-            price: 49.99,
-            showBookDetail: ko.observable(false)
-        }
-
-        ko.applyBindings(BookViewModel);
     </script>
 </head>
 
 <body>
     <h2>Publishers</h2>
-    <label>
-        <input type="checkbox" data-bind="checked: showBookDetail" /> Show Book Details
-    </label>
-    <div data-bind="slideVisible: showBookDetail, duration: 500" class="book">
+    <label><input type="checkbox" data-bind="checked: showBookDetail" />Show Book Detail</label>
+    <div data-bind="slideVisible: showBookDetail, duration:500" class='book'>
         <h3 data-bind="text: name"></h3>
         <p>Book: <span data-bind="text: book"></span></p>
         <p>Price: <span data-bind="text: price"></span></p>
+        <hr />
     </div>
 </body>
 
