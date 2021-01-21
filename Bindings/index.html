@@ -46,11 +46,21 @@
         //     ko.applyBindings(new myViewModel());
         // });
 
+        // $(function () {
+        //     var myViewModel = function () {
+        //         this.showMessage = ko.observable(false)
+        //     };
+        //     ko.applyBindings(new myViewModel());
+        // });
+
         $(function () {
-            var myViewModel = function () {
-                this.showMessage = ko.observable(false)
-            };
-            ko.applyBindings(new myViewModel());
+            ko.applyBindings({
+                name: "James",
+                course: {
+                    name: "Intro to programming",
+                    grade: 89
+                }
+            });
         });
     </script>
 </head>
@@ -88,13 +98,20 @@
         </div>
     </section> -->
 
-    <section>
+    <!-- <section>
         <h1>IF</h1>
         <input type="checkbox" data-bind="checked: showMessage">
         <h3 data-bind="if: showMessage">Apareceu 1</h3>
         <h3 data-bind="ifnot: showMessage">Apareceu 2</h3>
-    </section>
+    </section> -->
 
+    <section>
+        <h1 data-bind="text: name">IF</h1>
+        <p data-bind="with: course">
+            Course: <span data-bind="text: name"></span>
+            Grade: <span data-bind="text: grade"></span>
+        </p>
+    </section>
 </body>
 
 </html>
