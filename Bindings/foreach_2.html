@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Observables</title>
+    <script src="../jquery-3.5.1.min.js"></script>
+    <script src="../knockout-3.5.1.js"></script>
+
+    <script>
+        $(function () {
+            ko.applyBindings({
+                publishers: [
+                    {
+                        name: 'Apress',
+                        books: [
+                            {
+                                title: 'Pro Html 5',
+                                authors: [{
+                                    firstName: 'James', lastName: 'Wood'
+                                }]
+                            },
+                            {
+                                title: 'Pro C#',
+                                authors: [{
+                                    firstName: 'Lisa', lastName: 'Yanks'
+                                }]
+                            },
+                        ]
+                    },
+                    {
+                        name: 'Wiley',
+                        books: [
+                            {
+                                title: 'Javascript',
+                                authors: [{
+                                    firstName: 'Tim', lastName: 'Allen'
+                                }]
+                            },
+                            {
+                                title: 'Knockout JS',
+                                authors: [{
+                                    firstName: 'Billy', lastName: 'Bob'
+                                }]
+                            }
+                        ]
+                    }, {
+                        name: 'Prentice Hall',
+                        books: [
+                            {
+                                title: 'Jquery Ui',
+                                authors: [{
+                                    firstName: 'M', lastName: 'Safer'
+                                }]
+                            },
+                            {
+                                title: 'Java, How to Program',
+                                authors: [{
+                                    firstName: 'Shaun', lastName: 'Short'
+                                }]
+                            }
+                        ]
+                    }
+                ]
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div>
+        <section>
+            <ul data-bind="foreach: publishers">
+                <li>
+                    <span data-bind="text: $data.name"></span>
+                    <ul data-bind="foreach: books">
+                        <li>
+                            <span data-bind="text: title"></span>
+                            <ul data-bind="foreach: authors">
+                                <li>
+                                    <div>
+                                        <span data-bind="text: firstName"></span>
+                                        <span data-bind="text: lastName"></span>
+                                        <span data-bind="text: $parents[1].name"></span>
+                                        <span data-bind="text: $index"></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+    </div>
+</body>
+
+</html>
