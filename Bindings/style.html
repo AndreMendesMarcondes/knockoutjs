@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Observables</title>
+    <script src="../jquery-3.5.1.min.js"></script>
+    <script src="../knockout-3.5.1.js"></script>
+
+</head>
+
+<body>
+
+    <section>
+        <h1>Style</h1>
+        <div data-bind="style: {color: grade() < 70 ? 'red' : 'blue', fontWeight: isComplex() ? 'bold' : ''}">
+            <span data-bind="text: grade"></span>
+        </div>
+    </section>
+</body>
+
+</html>

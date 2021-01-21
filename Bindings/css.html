@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Observables</title>
+    <script src="../jquery-3.5.1.min.js"></script>
+    <script src="../knockout-3.5.1.js"></script>
+
+    <style>
+        .badGrade {
+            background-color: yellow;
+            color: red;
+        }
+    </style>
+
+    <script>
+
+        $(function () {
+            $(function () {
+                var myViewModel = function () {
+                    this.grade = ko.observable(69);
+                    this.isComplex = ko.observable(true);
+                }
+                ko.applyBindings(new myViewModel());
+            });
+        });
+
+    </script>
+</head>
+
+<body>
+
+    <section>
+        <h1>CSS</h1>
+        <div data-bind="css: {badGrade: grade() < 70}">
+            <span data-bind="text: grade"></span>
+        </div>
+    </section>
+</body>
+
+</html>

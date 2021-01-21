@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Observables</title>
+    <script src="../jquery-3.5.1.min.js"></script>
+    <script src="../knockout-3.5.1.js"></script>
+    <script>
+        $(function () {
+            ko.applyBindings({
+                name: "James",
+                course: {
+                    name: "Intro to programming",
+                    grade: 89
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <section>
+        <h1 data-bind="text: name">IF</h1>
+        <p data-bind="with: course">
+            Course: <span data-bind="text: name"></span>
+            Grade: <span data-bind="text: grade"></span>
+        </p>
+    </section>
+</body>
+
+</html>

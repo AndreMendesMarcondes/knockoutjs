@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Observables</title>
+    <script src="../jquery-3.5.1.min.js"></script>
+    <script src="../knockout-3.5.1.js"></script>
+
+    <script>
+        $(function () {
+            var myViewModel = function () {
+                this.showMessage = ko.observable(false);
+            };
+
+            ko.applyBindings(myViewModel);
+        });
+
+    </script>
+</head>
+
+<body>
+
+    <section>
+        <h1>check box <span data-bind="text: showMessage"></span></h1>
+        <input type="checkbox" data-bind="checked: showMessage" />
+        <h1 data-bind="visible: showMessage">Visible</h1>
+    </section>
+
+</body>
+
+</html>
