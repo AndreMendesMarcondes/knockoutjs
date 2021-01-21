@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Observables</title>
+    <script src="../jquery-3.5.1.min.js"></script>
+    <script src="../knockout-3.5.1.js"></script>
+    <script>
+        $(function () {
+            var viewModel = {
+                likeJS: ko.observable(false),
+                JSLibraries: ko.observableArray(['Knockout_JS', 'Kquuery_UI', 'Jquery'])
+            }
+
+            ko.applyBindings(viewModel);
+        });
+
+    </script>
+</head>
+
+<body>
+    <p>Do you like Javascript </p> <input type="checkbox" data-bind="checked: likeJS" />
+    <div data-bind="visible: likeJS">
+        Which Javascript lib have you used
+        <div><input type="checkbox" value="Knockout_JS" data-bind="checked: JSLibraries" />Knockout_JS</div>
+        <div><input type="checkbox" value="Kquuery_UI" data-bind="checked: JSLibraries" />Kquuery_UI</div>
+        <div><input type="checkbox" value="Jquery" data-bind="checked: JSLibraries" />Jquery</div>
+    </div>
+    <p>The lenght of array is: <b data-bind="text: JSLibraries().length"></b></p>
+</body>
+
+</html>
