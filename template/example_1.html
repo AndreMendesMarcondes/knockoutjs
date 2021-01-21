@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Observables</title>
+    <script src="../jquery-3.5.1.min.js"></script>
+    <script src="../knockout-3.5.1.js"></script>
+
+    <script type="text/html" id="book-template">
+        <h3 data-bind="text: name"></h3>
+        <p>Book: <span data-bind="text: book"></span></p>
+        <p>Price: <span data-bind="text: price"></span></p>
+    </script>
+
+    <script>
+        $(function () {
+            function BookViewModel() {
+                this.pub1 = { name: 'APress', book: 'Pro JS', price: 49.99 };
+                this.pub2 = { name: 'Prentice Hall', book: 'Knockout JS', price: 39.99 };
+                this.pub3 = { name: 'Wiley', book: 'Jquery', price: 44.59 };
+
+            }
+            ko.applyBindings(new BookViewModel());
+        });
+
+    </script>
+</head>
+
+<body>
+    <h2>Publishers</h2>
+    <div data-bind="template: {name: 'book-template', data: pub1}"></div>
+    <div data-bind="template: {name: 'book-template', data: pub2}"></div>
+    <div data-bind="template: {name: 'book-template', data: pub3}"></div>
+</body>
+
+</html>
