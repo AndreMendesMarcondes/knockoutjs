@@ -22,11 +22,20 @@
 
         //     ko.applyBindings(myViewModel);
         // });
+        // $(function () {
+        //     var myViewModel = function () {
+        //         this.grade = ko.observable(69);
+        //     }
+        //     ko.applyBindings(new myViewModel());
+        //});
         $(function () {
-            var myViewModel = function () {
-                this.grade = ko.observable(69);
-            }
-            ko.applyBindings(new myViewModel());
+            $(function () {
+                var myViewModel = function () {
+                    this.grade = ko.observable(71);
+                    this.isComplex = ko.observable(true);
+                }
+                ko.applyBindings(new myViewModel());
+            });
         });
     </script>
 </head>
@@ -43,9 +52,16 @@
         <span data-bind="html: participant"></span>
     </section> -->
 
-    <section>
+    <!-- <section>
         <h1>CSS</h1>
         <div data-bind="css: {badGrade: grade() < 70}">
+            <span data-bind="text: grade"></span>
+        </div>
+    </section> -->
+
+    <section>
+        <h1>Style</h1>
+        <div data-bind="style: {color: grade() < 70 ? 'red' : 'blue', fontWeight: isComplex() ? 'bold' : ''}">
             <span data-bind="text: grade"></span>
         </div>
     </section>
