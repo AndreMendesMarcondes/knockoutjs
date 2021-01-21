@@ -7,19 +7,26 @@
     <script src="../knockout-3.5.1.js"></script>
 
     <style>
-        .badGrade {
-            background-color: yellow;
-            color: red;
+        #definition {
+            width: 300px;
+            height: 180px;
+            background-color: gray;
+            color: black;
         }
     </style>
 
     <script>
         $(function () {
-            var myViewModel = function () {
-                this.source = ko.observable();
-                this.info = ko.observable();
+            var myViewModel = {
+                definitionEnabled: ko.observable(false),
+                showDefinition: function () {
+                    this.definitionEnabled(true);
+                },
+                hideDefinition: function () {
+                    this.definitionEnabled(false);
+                }
             }
-            ko.applyBindings(new myViewModel());
+            ko.applyBindings(myViewModel);
         });
 
     </script>
@@ -27,9 +34,12 @@
 
 <body>
     <section>
-        <h1 data-bind="text: name">IF</h1>
-        <p data-bind="with: course">
-        </p>
+        <div data-bind="event: {mouseover: showDefinition, mouseout: hideDefinition}">
+            What is Knockout?
+        </div>
+        <div id="definition" data-bind="visible: definitionEnabled">
+            Knockout is javascript lub
+        </div>
     </section>
 </body>
 
