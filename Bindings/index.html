@@ -11,7 +11,7 @@
             var myViewModel = {
                 participant: ko.observable()
             };
-            myViewModel.participant("<u><b>everyone</b></u>");
+            myViewModel.participant("<u><b>everyone</b></u>;<script>alert('opa');<\/script>");
 
             ko.applyBindings(myViewModel);
         });
