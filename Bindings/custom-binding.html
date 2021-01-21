@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Observables</title>
+    <script src="../jquery-3.5.1.min.js"></script>
+    <script src="../knockout-3.5.1.js"></script>
+    <style>
+        .book {
+            font-family: Verdana;
+            color: #0000FF;
+            background-color: #CCCCCC;
+            border: 1px solid black;
+            padding: 5px;
+            margin: 5px;
+            width: 200px;
+            border-radius: 25px;
+            -webkit-border-radius: 25px;
+        }
+    </style>
+    <script>
+        $(function () {
+            ko.bindingHandlers.slideVisible = {
+                init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+                    //this will be called when the binding is first applied to an element
+                    //set up any initial state, event handlers, etc. here
+                    var value = ko.unwrap(valueAccessor()); //get the current value
+                    $(element).toggle(value); //jquery will hide/show the element
+                },
+                update: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+                    //this will be called once when the binding is first applied to an element,
+                    //and again whenever the associated observable change value.
+                    //update the DOM elmenet based on the supplied values here
+
+                    //first get the lates data we're bouynd to
+                    var value = valueAccessor(),
+                        allBindings = allBindingsAccessor();
+
+                    //next, wheter or not the supplied model property is observable, get iits current
+                    var valueUnwrapped = ko.unwrap(value);
+
+                    var duration = allBindings.duration || 400;
+
+                    if (valueUnwrapped == true)
+                        $(element).slideDown(duration); //make the element visible
+                    else
+                        $(element).slideUp(duration); //make the element invisible
+                }
+            }
+
+        });
+
+        var BookViewModel = {
+            name: 'APress',
+            book: 'Pro Js',
+            price: 49.99,
+            showBookDetail: ko.observable(false)
+        }
+
+        ko.applyBindings(BookViewModel);
+    </script>
+</head>
+
+<body>
+    <h2>Publishers</h2>
+    <label>
+        <input type="checkbox" data-bind="checked: showBookDetail" /> Show Book Details
+    </label>
+    <div data-bind="slideVisible: showBookDetail, duration: 500" class="book">
+        <h3 data-bind="text: name"></h3>
+        <p>Book: <span data-bind="text: book"></span></p>
+        <p>Price: <span data-bind="text: price"></span></p>
+    </div>
+</body>
+
+</html>
