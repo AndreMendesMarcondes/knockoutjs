@@ -28,14 +28,22 @@
         //     }
         //     ko.applyBindings(new myViewModel());
         //});
+        // $(function () {
+        //     $(function () {
+        //         var myViewModel = function () {
+        //             this.grade = ko.observable(71);
+        //             this.isComplex = ko.observable(true);
+        //         }
+        //         ko.applyBindings(new myViewModel());
+        //     });
+        // });
+
         $(function () {
-            $(function () {
-                var myViewModel = function () {
-                    this.grade = ko.observable(71);
-                    this.isComplex = ko.observable(true);
-                }
-                ko.applyBindings(new myViewModel());
-            });
+            var myViewModel = function () {
+                this.source = ko.observable("rickandmroty.jpg"),
+                    this.info = ko.observable("Nice cat;")
+            }
+            ko.applyBindings(new myViewModel());
         });
     </script>
 </head>
@@ -59,10 +67,17 @@
         </div>
     </section> -->
 
-    <section>
+    <!-- <section>
         <h1>Style</h1>
         <div data-bind="style: {color: grade() < 70 ? 'red' : 'blue', fontWeight: isComplex() ? 'bold' : ''}">
             <span data-bind="text: grade"></span>
+        </div>
+    </section> -->
+
+    <section>
+        <h1>Attr html</h1>
+        <div>
+            <img data-bind="attr: {src: source, title: info}" />
         </div>
     </section>
 
