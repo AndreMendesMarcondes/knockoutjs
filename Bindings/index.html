@@ -38,11 +38,18 @@
         //     });
         // });
 
+        // $(function () {
+        //     var myViewModel = function () {
+        //         this.source = ko.observable("rickandmroty.jpg"),
+        //             this.info = ko.observable("Nice cat;")
+        //     }
+        //     ko.applyBindings(new myViewModel());
+        // });
+
         $(function () {
             var myViewModel = function () {
-                this.source = ko.observable("rickandmroty.jpg"),
-                    this.info = ko.observable("Nice cat;")
-            }
+                this.showMessage = ko.observable(false)
+            };
             ko.applyBindings(new myViewModel());
         });
     </script>
@@ -74,11 +81,18 @@
         </div>
     </section> -->
 
-    <section>
+    <!-- <section>
         <h1>Attr html</h1>
         <div>
             <img data-bind="attr: {src: source, title: info}" />
         </div>
+    </section> -->
+
+    <section>
+        <h1>IF</h1>
+        <input type="checkbox" data-bind="checked: showMessage">
+        <h3 data-bind="if: showMessage">Apareceu 1</h3>
+        <h3 data-bind="ifnot: showMessage">Apareceu 2</h3>
     </section>
 
 </body>
