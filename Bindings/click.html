@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Observables</title>
+    <script src="../jquery-3.5.1.min.js"></script>
+    <script src="../knockout-3.5.1.js"></script>
+
+    <style>
+        #main {
+            width: 50px;
+            height: 50px;
+            background-color: yellow;
+            color: black;
+            font: bold xx-large arial;
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
+
+    <script>
+        $(function () {
+            var myViewModel = {
+                counter: ko.observable(0),
+                incrementCounter: function () {
+                    var previousCounter = this.counter();
+                    this.counter(previousCounter + 1);
+                }
+            }
+            ko.applyBindings(myViewModel);
+        });
+
+    </script>
+</head>
+
+<body>
+    <div id="main" data-bind="visible: counter() < 10">
+        <span data-bind="text: counter"></span>
+    </div>
+    <div>
+        <button data-bind="click: incrementCounter">Increment</button>
+    </div>
+</body>
+
+</html>
